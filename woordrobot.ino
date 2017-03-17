@@ -17,7 +17,7 @@ void loop(){
   //delay(500);
   //rijd(255,false,1);
   //delay(3000);
-  schrijfletter('A');
+  schrijfletter('U');
   delay(100000);
 }
 
@@ -38,6 +38,10 @@ void schrijfletter(char L){
       schrijfa();
       break;
     case 'M':
+      schrijfm();
+      break;
+    case 'U':
+      schrijfu();
       break;
     case 'X':
       break;
@@ -48,14 +52,30 @@ void tiencmomhoog(){
 }
 void schrijfa(){
   //rijd(255,true, 2);
-  draai(200,true, 1);
+  draai(200,false, 1);
   rijd(255,true,2);
-  draai(200,false,1.5);
+  draai(200,true,2);
   rijd(255,false,2);
+  rijd(255,true,0.8);
+  draai(200,true,2.5);
   rijd(255,true,1);
-  draai(200,false,1);
-  rijd(255,true,0.5);
-  draai(200,true,1);
+  rijd(255,false,1);
+  draai(200,false,3);
+  rijd(255,false,0.8);
+}
+void schrijfm(){
+  rijd(255,true,2.2);
+  draai(200,true, 1);
+  rijd(255,false,1);
+  draai(200,false,1.8);
+  rijd(255,true,1);
+  draai(200,true,1.5);
+  rijd(255,false,2.2);
+}
+void schrijfu(){
+  rijd(255,true,2.2);
+  rijd(255,false,2.2); 
+  draai(255,true, 4);
   rijd(255,false,1);
   
 }
@@ -79,7 +99,7 @@ void stastil() {
 
 // Draai de robot voor een bepaalde tijd
 void draai(byte power, boolean richting, int duur) {
-  motor(1,power,richting);
+  motor(1,0,richting);
   motor(2,power,!richting);
   delay(duur*1000);
   stastil();
