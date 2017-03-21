@@ -1,0 +1,14 @@
+  //eerst draai
+  draai(0.75, rechts, 255); // 1
+  
+  // Naar voren rijden
+  rijd(4);
+  // Dan naar achter
+  rijd(2, achteruit);
+  draai(1.5, rechts);
+  
+  rijd(2,achteruit);
+  
+  rijd(4,vooruit);
+  
+  draai(0.75, rechts);
