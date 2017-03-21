@@ -1,6 +1,13 @@
 byte pins [] = {5,4,6,7 };
 byte motorpin [] = {pins[0],pins[2]};
 byte richtingpin [] = {pins[1],pins[3]};
+
+boolean rechts = false;
+boolean links = true;
+
+boolean achteruit = false;
+boolean vooruit = true;
+
 void setup() {
   Serial.begin(9600);
   for(byte i = 0; i < sizeof(pins);i++) {
@@ -22,7 +29,11 @@ void loop(){
   //delay(500);
   //rijd(255,false,1);
   //delay(3000);
-  schrijfletter('U');
+  schrijfletter('A');
+  delay(100000);
+  delay(100000);
+  delay(100000);
+  delay(100000);
   delay(100000);
 }
 
@@ -53,47 +64,70 @@ void schrijfletter(char L){
   }
 }
 void tiencmomhoog(){
-  rijd(255,true, 1.2);
+  rijd(1.2);
 }
+
 void schrijfa(){
-  //rijd(255,true, 2);
-  draai(200,false, 1);
-  rijd(255,true,2);
-  draai(200,true,2);
-  rijd(255,false,2);
-  rijd(255,true,0.8);
-  draai(200,true,2.5);
-  rijd(255,true,1);
-  rijd(255,false,1);
-  draai(200,false,3);
-  rijd(255,false,0.8);
+  //eerst draai
+  draai(1, rechts, 255); // 1
+  rijd(2);
+  //2e streep A
+  draai(2, links); // -1
+  rijd(2, achteruit);
+  //Terug over zelfde lijn voor middelste streep A
+  rijd(0.8);
+  //Draai voor middelste streep A
+  draai(2.5, links); //-2.5
+  //Middelste streep
+  rijd(1);
+  draai(2.5, links); //-5
+  rijd(2);
+  draai(1, links); //-6
+  
+  
+  /*rijd(255,false,1);
+  draai(200,false,2);
+  rijd(255,false,2);*/
 }
+
 void schrijfm(){
-  rijd(255,true,2.2);
+/*  rijd(255,true,2.2);
   draai(200,true, 1);
   rijd(255,false,1);
   draai(200,false,1.8);
   rijd(255,true,1);
   draai(200,true,1.5);
-  rijd(255,false,2.2);
+  rijd(255,false,2.2);*/
 }
-void schrijfu(){
+void schrijfu(){/*
   rijd(255,true,2.2);
   rijd(255,false,2.2); 
   draai(255,true, 4);
   rijd(255,false,1);
-  
+ */ 
 }
+
 // Rijd voor of achteruit voor een bepaalde tijd in seconden
-void rijd(byte power, boolean richting, float duur) {
- motor(1,power,richting);
- if(richting){
- motor(2,power-20,richting);
- } else{
- motor(2,power-40,richting);  
- }
- delay(duur*1000);
- stastil();
+void rijd(float duur, boolean richting, byte power) {
+    motor(1,power,richting);
+    if(richting) {
+        motor(2,power-20,richting);
+    } else{
+        motor(2,power-40,richting);  
+    }
+    delay(duur*1000);
+    stastil();
+}
+
+void rijd(float duur, boolean richting) {
+    byte power = 255;
+    rijd(duur, richting, power);
+}
+
+void rijd(float duur) {
+  byte power = 255;
+  boolean richting = vooruit;
+  rijd(duur, richting, power);
 }
 
 // Stop met rijden
@@ -103,22 +137,16 @@ void stastil() {
 }
 
 // Draai de robot voor een bepaalde tijd
-void draai(byte power, boolean richting, int duur) {
-  motor(1,0,richting);
+// 1 seconde = 60 graden draai
+// 3 seconden = 180 graden
+void draai(int duur, boolean richting, byte power) {
+  motor(1,power,richting);
   motor(2,power,!richting);
   delay(duur*1000);
   stastil();
 }
 
-// Rijd voor of achteruit voor een bepaalde tijd in seconden
-void rijd(byte powerlinks, byte powerrechts, boolean richting, float duur) {
- motor(1,powerlinks,richting);
- if(richting){
- motor(2,powerrechts,richting);
- } else{
- motor(2,powerrechts,richting);  
- }
- delay(duur*1000);
- stastil();
+void draai(int duur, boolean richting) {
+  byte power = 200;
+  draai(duur, richting, power);
 }
-
