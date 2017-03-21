@@ -30,6 +30,7 @@ void loop(){
   //rijd(255,false,1);
   //delay(3000);
   schrijfletter('A');
+  //rijd(1.5);
   delay(100000);
   delay(100000);
   delay(100000);
@@ -39,8 +40,9 @@ void loop(){
 
 // Functie om motoren te laten draaien, motor moet 1 of 2 zijn, power tot 255, 
 void motor(byte motor, byte power, boolean richting) {
+  
   if (richting) {
-   digitalWrite(richtingpin[motor-1], HIGH); 
+    digitalWrite(richtingpin[motor-1], HIGH); 
   } else {
     digitalWrite(richtingpin[motor-1], LOW);
   }
@@ -64,12 +66,12 @@ void schrijfletter(char L){
   }
 }
 void tiencmomhoog(){
-  rijd(1.2);
+  rijd(1.5);
 }
 
 void schrijfa(){
   //eerst draai
-  draai(1, rechts, 255); // 1
+  draai(1, rechts); // 1
   rijd(2);
   //2e streep A
   draai(2, links); // -1
@@ -109,12 +111,13 @@ void schrijfu(){/*
 
 // Rijd voor of achteruit voor een bepaalde tijd in seconden
 void rijd(float duur, boolean richting, byte power) {
-    motor(1,power,richting);
+    motor(1, power, richting);
     if(richting) {
-        motor(2,power-20,richting);
+        motor(2,power-40,richting);
     } else{
         motor(2,power-40,richting);  
     }
+    //motor(2,power,richting);
     delay(duur*1000);
     stastil();
 }
@@ -140,8 +143,9 @@ void stastil() {
 // 1 seconde = 60 graden draai
 // 3 seconden = 180 graden
 void draai(int duur, boolean richting, byte power) {
+  if(power > 215) power = 215
   motor(1,power,richting);
-  motor(2,power,!richting);
+  motor(2,power+40,!richting);
   delay(duur*1000);
   stastil();
 }
