@@ -6,6 +6,11 @@ void setup() {
   for(byte i = 0; i < sizeof(pins);i++) {
     pinMode(i, OUTPUT);
   }
+  
+  // pins voor lijnsensoren
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
 }
 
 void loop(){
