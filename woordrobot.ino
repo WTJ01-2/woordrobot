@@ -1,4 +1,4 @@
-byte pins [] = {5,4,6,7,3 };
+byte pins [] = {5,4,6,7 };
 byte motorpin [] = {pins[0],pins[2]};
 byte richtingpin [] = {pins[1],pins[3]};
 void setup() {
