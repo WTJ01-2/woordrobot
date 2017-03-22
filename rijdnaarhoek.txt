@@ -1,0 +1,14 @@
+void rijdnaarhoek(){
+  draai(2.5, links); //-5
+  while(sensor1 < 500 && sensor2 < 500 && sensor3 < 500){
+    motor(1,255,false);
+    motor(2,255,false);
+  }
+  stastil();
+  draai(2.5, rechts);
+  while(sensor1 < 500 & sensor2 < 500 && sensor3 < 500){
+    motor(1,255,false);
+    motor(2,255,false);    
+  }
+  stastil();
+}
