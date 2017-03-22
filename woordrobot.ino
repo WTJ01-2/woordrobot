@@ -1,4 +1,4 @@
-byte pins [] = {5,4,6,7 };
+byte pins [] = {5,4,6,7, 1, 2, 3, 8, 9, 10, 11, 12, 13 };
 byte motorpin [] = {pins[0],pins[2]};
 byte richtingpin [] = {pins[1],pins[3]};
 
@@ -7,6 +7,10 @@ boolean links = true;
 
 boolean achteruit = false;
 boolean vooruit = true;
+
+char woord[] = {'M', 'A', 'X'};
+
+boolean start = false;
 
 void setup() {
   Serial.begin(9600);
@@ -18,24 +22,19 @@ void setup() {
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
   pinMode(A2, INPUT);
+  
+  // pin voor startknop
+  pinMode(A3, INPUT);
 }
 
 void loop(){
-  //draai(255,false,3);
-  //delay(3000);
-  //draai(255,true,3);
-  //delay(3000);
-  //rijd(255, true,1);
-  //delay(500);
-  //rijd(255,false,1);
-  //delay(3000);
+  while(!start) {
+     start = checkbutton(); 
+  }
   schrijfletter('A');
-  //rijd(1.5);
-  delay(100000);
-  delay(100000);
-  delay(100000);
-  delay(100000);
-  delay(100000);
+  
+  // Einde van de loop
+  start = false;
 }
 
 // Functie om motoren te laten draaien, motor moet 1 of 2 zijn, power tot 255, 
@@ -154,3 +153,139 @@ void draai(int duur, boolean richting) {
   byte power = 200;
   draai(duur, richting, power);
 }
+
+void toonnummer(int nummer) {
+  toonL();
+  delay(5);
+  
+  digitalWrite(3, HIGH); // GROUND
+  digitalWrite(2, LOW); // GROUND
+  switch (nummer){
+    case 0:
+      digitalWrite(1, LOW);
+      digitalWrite(13, HIGH);
+      digitalWrite(11, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+    case 1:
+      digitalWrite(1, LOW);
+      digitalWrite(13, LOW);
+      digitalWrite(11, LOW);
+      digitalWrite(10, LOW);
+      digitalWrite(8, LOW);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+    case 2:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, LOW);
+      digitalWrite(11, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, LOW); 
+      break;
+    case 3:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, LOW);
+      digitalWrite(11, LOW);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+    case 4:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, HIGH);
+      digitalWrite(11, LOW);
+      digitalWrite(10, LOW);
+      digitalWrite(8, LOW);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+    case 5:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, HIGH);
+      digitalWrite(11, LOW);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, LOW);
+      digitalWrite(12, HIGH); 
+      break;
+    case 6:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, HIGH);
+      digitalWrite(11, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, LOW);
+      digitalWrite(12, HIGH); 
+      break;
+    case 7:
+      digitalWrite(1, LOW);
+      digitalWrite(13, LOW);
+      digitalWrite(11, LOW);
+      digitalWrite(10, LOW);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+    case 8:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, HIGH);
+      digitalWrite(11, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+    case 9:
+      digitalWrite(1, HIGH);
+      digitalWrite(13, HIGH);
+      digitalWrite(11, LOW);
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(12, HIGH); 
+      break;
+  }
+  
+  
+  delay(5);
+}
+
+void toonL() {
+    digitalWrite(1, LOW);
+    digitalWrite(13, HIGH);
+    digitalWrite(11, HIGH);
+    digitalWrite(10, HIGH);
+    digitalWrite(8, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(12, LOW);
+    
+    digitalWrite(3, LOW); // GROUND
+    digitalWrite(2, HIGH); // GROUND
+}
+
+void toonniks() {
+  digitalWrite(1, LOW);
+    digitalWrite(13, LOW);
+    digitalWrite(11, LOW);
+    digitalWrite(10, LOW);
+    digitalWrite(8, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(12, LOW);
+}
+
+boolean checkbutton(){
+ int buttonstate = analogRead(A3);
+ if(buttonstate > 1020) {
+  return true;
+ } else {
+  return false; 
+ }
+}
+
