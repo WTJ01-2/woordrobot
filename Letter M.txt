@@ -1,0 +1,15 @@
+void schrijfm(){
+  //eerst streep recht omhoog
+  rijd(2);
+  // draai voor streep naar beneden
+  draai(2, links); // -1
+  rijd(2, achteruit);
+  // draai voor streep naar boven
+  draai(2, rechts);
+  // lijn
+  rijd(2);
+  // draai voor laatste lijn
+  draai(2, links);
+  // naar beneden rijden en done
+  rijd(2, achteruit);
+}
