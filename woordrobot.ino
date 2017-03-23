@@ -1,4 +1,4 @@
-byte pins [] = {5,4,6,7 };
+byte pins [] = {5,4,6,7, 1, 2, 3, 8, 9, 10, 11, 12, 13 }; 
 byte motorpin [] = {pins[0],pins[2]};
 byte richtingpin [] = {pins[1],pins[3]};
 int motor_rechts = 1; //1 IS RECHTS
@@ -31,15 +31,6 @@ void setup() {
   //Serial.begin(9600);
   for(byte i = 0; i < sizeof(pins);i++) {
     pinMode(i, OUTPUT);
-    pinMode(1, OUTPUT);
-    pinMode(2, OUTPUT);
-    pinMode(3, OUTPUT);
-    pinMode(8, OUTPUT);
-    pinMode(9, OUTPUT);
-    pinMode(10, OUTPUT);
-    pinMode(11, OUTPUT);
-    pinMode(12, OUTPUT);
-    pinMode(13, OUTPUT);
   }
   
   // pins voor lijnsensoren
